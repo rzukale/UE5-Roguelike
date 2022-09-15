@@ -29,7 +29,7 @@ void ARLPowerUp_Action::Interact_Implementation(APawn* InstigatorPawn)
 
 FText ARLPowerUp_Action::GetInteractionText_Implementation(APawn* InstigatorPawn)
 {
-	return FText::Format(LOCTEXT("PowerupAction_InteractMessage", "Grants '{0}' ability on use"), ActionToGrant->GetDisplayNameText());
+	return LOCTEXT("PowerupAction_InteractMessage", "Grants the Sprint ability on use");
 }
 
 #undef LOCTEXT_NAMESPACE
