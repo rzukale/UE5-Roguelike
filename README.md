@@ -1,4 +1,7 @@
 # UE5-Roguelike
+# Links
+  - Download and play packaged executable via [itch.io](https://antaran.itch.io/roguelike-project)
+
 
 # Feature list
   - Multiplayer support (Steam enabled).
