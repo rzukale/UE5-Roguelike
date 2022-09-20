@@ -1,6 +1,7 @@
 # UE5-Roguelike
 ![alt text](https://github.com/rzukale/UE5-Roguelike/blob/main/media/rl_ultimate.png?raw=true)
 # Links
+  - Gameplay video https://youtu.be/EsagvHmz1MA
   - Download and play packaged executable via [itch.io](https://antaran.itch.io/roguelike-project)
 
 
