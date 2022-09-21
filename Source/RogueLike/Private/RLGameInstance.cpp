@@ -6,6 +6,7 @@
 #include "OnlineSessionSettings.h"
 #include "Engine/World.h"
 #include "Interfaces/OnlineSessionInterface.h"
+#include "../RogueLike.h"
 
 const static FName SESSION_NAME = TEXT("My Session Game");
 
@@ -27,13 +28,13 @@ void URLGameInstance::Init()
 			SessionInterface->OnDestroySessionCompleteDelegates.AddUObject(this, &URLGameInstance::OnDestroySessionComplete);
 			SessionInterface->OnFindSessionsCompleteDelegates.AddUObject(this, &URLGameInstance::OnFindSessionsComplete);
 			SessionInterface->OnJoinSessionCompleteDelegates.AddUObject(this, &URLGameInstance::OnJoinSessionComplete);
+			SessionSearch = MakeShareable(new FOnlineSessionSearch());
 		}
 	}
 }
 
 void URLGameInstance::RefreshServerList()
 {
-	SessionSearch = MakeShareable(new FOnlineSessionSearch());
 	if (SessionSearch.IsValid())
 	{
 		//SessionSearch->bIsLanQuery = true;
@@ -72,7 +73,8 @@ void URLGameInstance::OnDestroySessionComplete(FName SessionName, bool bWasSucce
 {
 	if (bWasSuccess)
 	{
-		CreateSession();
+		UE_LOG(LogTemp, Log, TEXT("Session Destroyed successfully"));
+		//CreateSession();
 	}
 }
 
@@ -98,8 +100,13 @@ void URLGameInstance::OnFindSessionsComplete(bool bWasSuccess)
 		ServerData.Emplace(Data);
 	}
 	UE_LOG(LogTemp, Log, TEXT("Sessions loop finished"));
-
-	OnSearchSessionComplete.Broadcast(bWasSuccess);
+	bool bFoundSessions = true;
+	if (ServerData.IsEmpty())
+	{
+		LogOnScreen(this, "No active sessions found.");
+		bFoundSessions = false;
+	}
+	OnSearchSessionComplete.Broadcast(bFoundSessions);
 }
 
 void URLGameInstance::OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
@@ -142,6 +149,11 @@ void URLGameInstance::CreateSession()
 	}
 }
 
+bool URLGameInstance::DestroySession()
+{
+	return SessionInterface->DestroySession(SESSION_NAME);
+}
+
 void URLGameInstance::HostGame()
 {
 	if (SessionInterface.IsValid())
@@ -153,7 +165,16 @@ void URLGameInstance::HostGame()
 		}
 		else
 		{
-			SessionInterface->DestroySession(SESSION_NAME);
+			bool bWasDestroyed = DestroySession();
+			if (bWasDestroyed == true)
+			{
+				CreateSession();
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Failed to Destroy active session"));
+				return;
+			}
 		}
 	}
 }

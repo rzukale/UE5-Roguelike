@@ -67,7 +67,7 @@ void ARLGameModeBase::KillAll()
 		URLAttributeComponent* AttribComp = URLAttributeComponent::GetAttributes(Bot);
 		if (ensure(AttribComp) && AttribComp->IsAlive())
 		{
-			AttribComp->Kill(this); // TODO: Add player for kill credit even when cheating
+			AttribComp->Kill(this);
 		}
 	}
 }

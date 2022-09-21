@@ -7,7 +7,7 @@
 #include "Interfaces/OnlineSessionInterface.h"
 #include "RLGameInstance.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSearchSessionComplete, bool, bWasSuccess);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSearchSessionComplete, bool, bFoundSessions);
 
 USTRUCT(BlueprintType)
 struct FServerData
@@ -46,6 +46,9 @@ protected:
 	void OnFindSessionsComplete(bool bWasSuccess);
 	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
 	void CreateSession();
+
+	UFUNCTION(BlueprintCallable)
+	bool DestroySession();
 
 	TSharedPtr<FOnlineSessionSearch> SessionSearch;
 	IOnlineSessionPtr SessionInterface;
