@@ -56,6 +56,9 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void HostGame();
 
+	UFUNCTION(BlueprintCallable)
+	bool HasActiveGameSession();
+
 	UPROPERTY(BlueprintAssignable)
 	FOnSearchSessionComplete OnSearchSessionComplete;
 

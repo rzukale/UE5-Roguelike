@@ -178,3 +178,17 @@ void URLGameInstance::HostGame()
 		}
 	}
 }
+
+bool URLGameInstance::HasActiveGameSession()
+{
+	if (SessionInterface.IsValid())
+	{
+		FNamedOnlineSession* NamedSession = SessionInterface->GetNamedSession(SESSION_NAME);
+		if (NamedSession == nullptr)
+		{
+			return false;
+		}
+		return true;
+	}
+	return false;
+}

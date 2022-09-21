@@ -18,6 +18,7 @@
 #include "GameFramework/GameStateBase.h"
 #include "../RogueLike.h"
 #include "Engine/AssetManager.h"
+#include "GameFramework/GameSession.h"
 
 static TAutoConsoleVariable<bool> CVarSpawnBots(TEXT("rl.SpawnBots"), true, TEXT("Enable Bot spawning via timer."), ECVF_Cheat);
 
@@ -287,4 +288,28 @@ void ARLGameModeBase::HandleStartingNewPlayer_Implementation(APlayerController* 
 	Super::HandleStartingNewPlayer_Implementation(NewPlayer);
 
 	SaveSystem->OverrideSpawnTransform(NewPlayer);
+}
+
+
+APlayerController* ARLGameModeBase::Login(UPlayer* NewPlayer, ENetRole InRemoteRole, const FString& Portal, const FString& Options, const FUniqueNetIdRepl& UniqueId, FString& ErrorMessage)
+{
+	APlayerController* PC = Super::Login(NewPlayer, InRemoteRole, Portal, Options, UniqueId, ErrorMessage);
+	if (PC)
+	{
+		UE_LOG(LogTemp, Log, TEXT("Registered player"));
+		GameSession->RegisterPlayer(PC, UniqueId, false);
+		return PC;
+	}
+	return nullptr;
+}
+
+void ARLGameModeBase::Logout(AController* Exiting)
+{
+	Super::Logout(Exiting);
+	UE_LOG(LogTemp, Warning, TEXT("Unregistering player"));
+	const APlayerController* PC = Cast<APlayerController>(Exiting);
+	if (PC)
+	{
+		GameSession->UnregisterPlayer(PC);
+	}
 }
