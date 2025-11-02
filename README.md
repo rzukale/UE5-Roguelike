@@ -48,7 +48,3 @@
     - Left-Shift: Sprint ability (Gained via Powerup in the game-world)
     - Note on multiplayer:
       - Steam enabled so you will need 2 separate PCs to network (since you can only run 1 steam account per PC)
-      - to enable local multiplayer you can download source, then run following command on powershell/DevCmd:
-        "[local path to UE5]\Engine\Binaries\Win64\UnrealEditor.exe" "[local path to source uproject file]" -game -nosteam
-        (Example: "E:\UE_5.2\Engine\Binaries\Win64\UnrealEditor.exe" "E:\c++ repos\UE5-RogueLike\RogueLike.uproject" -game -nosteam)
-  
