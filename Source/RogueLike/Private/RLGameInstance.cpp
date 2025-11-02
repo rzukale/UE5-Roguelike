@@ -6,6 +6,7 @@
 #include "OnlineSessionSettings.h"
 #include "Engine/World.h"
 #include "Interfaces/OnlineSessionInterface.h"
+#include "Online/OnlineSessionNames.h"
 #include "../RogueLike.h"
 
 const static FName SESSION_NAME = TEXT("My Session Game");
