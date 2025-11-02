@@ -31,6 +31,12 @@
   - Powerup consumables to gain health/credits/abilities.
   - Main menu to host game and go to Join menu:
     - Join menu to list available sessions to choose from and join.
+
+  # Compiling
+  Install Unreal Engine 5.2  
+  Install Visual Studio 2022, follow installation guide from [Epic](https://dev.epicgames.com/documentation/en-us/unreal-engine/setting-up-visual-studio-development-environment-for-cplusplus-projects-in-unreal-engine?application_version=5.2)  
+  After cloning the project, right click RogueLike.uproject, if you want the .sln file, select "Generate Visual Studio project files". Or if you just want to launch the editor, select "Launch Game" and select "Yes" when prompted to build the project.
+  
   # Usage
     - Built with UE 5.2 & Visual Studio 2022.
     - WASD-keys to move
