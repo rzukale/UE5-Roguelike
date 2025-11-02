@@ -32,7 +32,7 @@
   - Main menu to host game and go to Join menu:
     - Join menu to list available sessions to choose from and join.
   # Usage
-    - Built with UE 5.2
+    - Built with UE 5.2 & Visual Studio 2022, follow installation guide from Epic: [UE5.2-VS2022](https://dev.epicgames.com/documentation/en-us/unreal-engine/setting-up-visual-studio-development-environment-for-cplusplus-projects-in-unreal-engine?application_version=5.2)
     - WASD-keys to move
     - Q: Blackhole ultimate (requires 50 Rage (You gain rage from taking damage. Progress bar in lower left in HUD))
     - E: Teleport
